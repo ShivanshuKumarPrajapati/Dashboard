@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema;
+const {ObjectId} = mongoose.Schema;
 
 const userDataSchema = new mongoose.Schema({
     creative_thinking: {
@@ -18,7 +18,7 @@ const userDataSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    years_of_experience: {
+    year: {
         type: Number,
         required: true,
         unique: true,
