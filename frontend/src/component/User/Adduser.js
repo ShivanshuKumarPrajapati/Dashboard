@@ -4,7 +4,7 @@ import { FaUser } from 'react-icons/fa';
 
 import { addUser } from './helper';
 
-const Adduser = () => {
+const Adduser = ({reload,setReload}) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -25,6 +25,7 @@ const Adduser = () => {
             {
                 setName('');
                 setEmail('');
+                setReload(!reload);
                 }
         }
         );

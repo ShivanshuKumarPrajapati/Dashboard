@@ -2,8 +2,6 @@ import { API } from "../../backend";
 
 
 export const addUser = (user) => {
-    console.log(API);
-    console.log(user);
     return fetch(`${API}/user/add`, {
         method: "POST",
         headers: {

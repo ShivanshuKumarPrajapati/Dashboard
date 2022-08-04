@@ -2,12 +2,14 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 
 import Adduser from './User/Adduser';
+import AdduserData from './UserData/AdduserData';
 import { getAllUsers } from './User/helper';
 
 const Home = () => {
 
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(false);
+  const [reload,setReload]= useState(false);
 
   useEffect(() => {
     getAllUsers().then(data => {
@@ -21,13 +23,14 @@ const Home = () => {
     }
     );
   }
-    , []);
+    , [reload]);
   
 
   return (
     <React.Fragment>
       <div className="d-flex gap-3 mb-4 ">
-        <Adduser />
+        <Adduser reload={reload} setReload={setReload} />
+        <AdduserData reload={reload} setReload={setReload} />
       </div>
 
       {error ? (
@@ -40,7 +43,7 @@ const Home = () => {
               {users.map((user, index) => {
                 return (
                   <tr key={index} className="mt-2">
-                    <td className='ms-2'>{user.name}</td>
+                    <td className="ms-2">{user.name}</td>
                     <td>
                       <button className="btn btn-sm  bg-success btn-success float-end">
                         View Details
