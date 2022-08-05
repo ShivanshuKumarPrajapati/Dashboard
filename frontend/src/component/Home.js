@@ -6,9 +6,9 @@ import Adduser from './User/Adduser';
 import AdduserData from './UserData/AdduserData';
 import { getAllUsers } from './User/helper';
 
-const Home = () => {
+const Home = ({users,setUsers,searchFlag,setSearchFlag}) => {
 
-  const [users, setUsers] = useState([]);
+
   const [error, setError] = useState(false);
   const [reload,setReload]= useState(false);
 
@@ -20,25 +20,61 @@ const Home = () => {
       } else {
         setUsers(data);
         setError(false);
+        setSearchFlag(false);
       }
     }
     );
   }
     , [reload]);
   
+  if (searchFlag && users.length === 0) {
+    return (
+      <div>
+        <Link to="/">
+          <button
+            className="btn btn-success"
+            onClick={() => {
+              setSearchFlag(false);
+              setReload(!reload);
+            }}
+          >
+            Back
+          </button>
+        </Link>
+        <h2 className="text-center">No user Found</h2>
+      </div>
+    );
+}
+  
 
   return (
     <React.Fragment>
-      <div className="d-flex gap-3 mb-4 ">
-        <Adduser reload={reload} setReload={setReload} />
-        <AdduserData reload={reload} setReload={setReload} />
-      </div>
+      {searchFlag ? (
+        <Link to="/">
+          <button
+            className="btn btn-success"
+            onClick={() => {
+              setSearchFlag(false);
+              setReload(!reload);
+            }}
+          >
+            Back
+          </button>
+        </Link>
+      ) : (
+        <div className="d-flex gap-3 mb-4 ">
+          <Adduser reload={reload} setReload={setReload} />
+          <AdduserData reload={reload} setReload={setReload} />
+        </div>
+      )}
 
       {error ? (
         <div className="alert alert-danger">Something went wrong!</div>
       ) : (
         <div className="container">
-          <h3 className="text-center mt-3">User List</h3>
+          <h3 className="text-center mt-4">
+            Registered User{searchFlag ? "" : "s"}
+          </h3>
           <table className="table table-hover mt-4">
             <tbody>
               {users.map((user, index) => {
@@ -47,10 +83,10 @@ const Home = () => {
                     <td className="ms-2">{user.name}</td>
                     <td>
                       <Link to={`/userData/${user._id}`}>
-                      <button className="btn btn-sm  bg-success btn-success float-end">
-                        View Details
+                        <button className="btn btn-sm  bg-success btn-success float-end">
+                          View Details
                         </button>
-                        </Link>
+                      </Link>
                     </td>
                   </tr>
                 );
