@@ -32,7 +32,7 @@ const Home = ({users,setUsers,searchFlag,setSearchFlag}) => {
       <div>
         <Link to="/">
           <button
-            className="btn btn-success"
+            className="btn btn-primary"
             onClick={() => {
               setSearchFlag(false);
               setReload(!reload);
@@ -41,7 +41,7 @@ const Home = ({users,setUsers,searchFlag,setSearchFlag}) => {
             Back
           </button>
         </Link>
-        <h2 className="text-center">No user Found</h2>
+        <h2 className="text-center mt-5">No user Found</h2>
       </div>
     );
 }

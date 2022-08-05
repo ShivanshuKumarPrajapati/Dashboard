@@ -15,7 +15,6 @@ exports.addData = (req, res) => {
 
 exports.getUserData = (req, res) => {
 
-    // console.log(req.params.userId);
     Data.find()
         .populate({
             path: 'user',

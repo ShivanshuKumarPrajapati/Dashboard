@@ -10,10 +10,6 @@ const userDataSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    influencing_tactics: {
-        type: Number,
-        required: true,
-    },
     problem_solving: {
         type: Number,
         required: true,

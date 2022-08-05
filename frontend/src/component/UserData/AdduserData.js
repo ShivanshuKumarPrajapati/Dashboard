@@ -41,7 +41,6 @@ useEffect(() => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(data);
     addUserData(data).then((data) => {
       if (data.error) {
         setError(true);

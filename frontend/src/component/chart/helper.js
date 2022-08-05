@@ -12,17 +12,20 @@ export const filterData = (userId) => {
     years = [];
     creativeThinking = [];
 
-    getUserData(userId).then((data) => {
+    const count  =  getUserData(userId).then((data) => {
         data.map((item) => {
             commSkills.push(item.communication_skills);
             problemSolving.push(item.problem_solving);
             years = [...years, item.year];
             creativeThinking.push(item.creative_thinking);
         })
-
+      
+      return data.length;
     }
     )
         .catch((err) => console.log(err));
+  
+  return count;
 
 }
 
@@ -100,3 +103,50 @@ export const getCreativeThinkingSkills = () => {
 
     return data;
 }
+
+
+export const averageCal = (arrName) => {
+    let sum = 0;
+   if(arrName === 'communication_skills'){
+       sum = commSkills.reduce(function (x, y) {
+        return x + y;
+    }, 0);
+       }
+   else if (arrName === 'problem_solving') {
+        sum = problemSolving.reduce(function (x, y) {
+          return x + y;
+        }, 0);
+     
+   }
+   else if (arrName === 'creative_thinking') {
+        sum = creativeThinking.reduce(function (x, y) {
+          return x + y;
+        } , 0);
+   }
+  
+    return sum / years.length;
+}
+
+export const calMedian = (arrName) => {
+  const middle = (years.length + 1) / 2;
+  
+  let sorted;
+  if (arrName === 'communication_skills') {
+      sorted = commSkills.sort((a, b) => a - b);
+    }
+  else if(arrName === 'problem_solving')
+  {
+      sorted = problemSolving.sort((a, b) => a - b);
+    }
+  else if(arrName === 'creative_thinking')
+  {
+      sorted = creativeThinking.sort((a, b) => a - b);
+    }
+
+    const isEven = sorted.length % 2 === 0;
+  
+    return isEven ? (sorted[middle - 1.5]
+      + sorted[middle - 0.5]) / 2 :
+      sorted[middle - 1];
+}
+

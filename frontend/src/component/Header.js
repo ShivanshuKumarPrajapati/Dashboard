@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
+import {useLocation} from 'react-router-dom'
 
 const Header = ({users,setUsers,searchFlag,setSearchFlag}) => {
 
   const [name, setName] = useState('');
-
+  const location = useLocation();
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -43,7 +46,7 @@ const Header = ({users,setUsers,searchFlag,setSearchFlag}) => {
             <h1>Dashboard</h1>
           </div>
         </a>
-        {searchFlag ? "": searchForm()}
+        {searchFlag ? "": location.pathname === "/" ? searchForm() : ""}
       </div>
     </nav>
   );
