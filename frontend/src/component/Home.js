@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Adduser from './User/Adduser';
 import AdduserData from './UserData/AdduserData';
@@ -45,9 +46,11 @@ const Home = () => {
                   <tr key={index} className="mt-2">
                     <td className="ms-2">{user.name}</td>
                     <td>
+                      <Link to={`/userData/${user._id}`}>
                       <button className="btn btn-sm  bg-success btn-success float-end">
                         View Details
-                      </button>
+                        </button>
+                        </Link>
                     </td>
                   </tr>
                 );
